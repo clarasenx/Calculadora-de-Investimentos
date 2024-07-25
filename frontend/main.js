@@ -1,4 +1,4 @@
-import { generateArray } from './src/investmentGoals';
+import { generateArray } from "./src/investmentGoals";
 
 const form = document.getElementById("investmentForm");
 
@@ -10,9 +10,7 @@ function renderProgression(evt) {
   const additionContribution = Number(
     document.getElementById("additionalContribution").value.replace(",", ".")
   );
-  const timeAmount = Number(
-    document.getElementById("timeAmount").value.replace(",", ".")
-  );
+  const timeAmount = Number(document.getElementById("timeAmount").value);
   const timeAmountPeriod = document.getElementById("timeAmountPeriod").value;
   const returnRate = Number(
     document.getElementById("returnRate").value.replace(",", ".")
@@ -22,34 +20,41 @@ function renderProgression(evt) {
     document.getElementById("taxRate").value.replace(",", ".")
   );
 
-  const returnArray = generateArray(startingAmount, timeAmount, timeAmountPeriod, additionContribution, returnRate, evaluationPeriod);
+  const returnArray = generateArray(
+    startingAmount,
+    timeAmount,
+    timeAmountPeriod,
+    additionContribution,
+    returnRate,
+    evaluationPeriod
+  );
 
   console.log(returnArray);
-}
+};
 
 function validateInput(evt) {
-  if (evt.target.value === '') {
-    return
-  }
+  if (evt.target.value === "") {
+    return;
+  };
 
-  const { parentElement } = evt.target;
+  const parentElement = evt.target.parentElement;
   const grandParentElement = evt.target.parentElement.parentElement;
-  const inputValue = evt.target.value.replace(',', '.')
+  const inputValue = evt.target.value.replace(",", ".");
 
-  if (isNaN(inputValue) || Number(inputValue) > 0) {
+  if (isNaN(inputValue) || Number(inputValue) <= 0) {
     const errorTextElement = document.createElement("p");
-    errorTextElement.classList.add('text-red-600 text-semibold text-sm');
-    errorTextElement.innerText = 'Insira um valor numérico e maior que 0';
+    errorTextElement.classList.add("text-red-600 text-semibold text-sm");
+    errorTextElement.innerText = "Insira um valor numérico e maior que zero";
 
-    parentElement.classList.add('error');
+    parentElement.classList.add("error");
     grandParentElement.appendChild(errorTextElement);
-  } 
-}
+  };
+};
 
-for (const elementForm of form) {
-  if (elementForm.tagName === "INPUT" && elementForm.hasAttribute('name')) {
-    elementForm.addEventListener('blur', validateInput);
-  }
-}
+for (const formElement of form) {
+  if (formElement.tagName === "input" && formElement.hasAttribute("name")) {
+    formElement.addEventListener("blur", validateInput);
+  };
+};
 
-form.addEventListener('submit', renderProgression);
+form.addEventListener("submit", renderProgression);
