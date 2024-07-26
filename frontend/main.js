@@ -5,7 +5,7 @@ const form = document.getElementById("investmentForm");
 function renderProgression(evt) {
   evt.preventDefault();
 
-  if (document.querySelector('.error')) {
+  if (document.querySelector(".error")) {
     return;
   }
 
@@ -35,19 +35,21 @@ function renderProgression(evt) {
   );
 
   console.log(returnArray);
-};
+}
 
 function validateInput(evt) {
   if (evt.target.value === "") {
     return;
-  };
+  }
 
-  const parentElement = evt.target.parentElement;
+  const { parentElement } = evt.target;
   const grandParentElement = evt.target.parentElement.parentElement;
   const inputValue = evt.target.value.replace(",", ".");
 
-  if (isNaN(inputValue) || Number(inputValue) <= 0 && !parentElement.classList.contains('error')) {
-
+  if (
+    isNaN(inputValue) ||
+    (Number(inputValue) <= 0 && !parentElement.classList.contains("error"))
+  ) {
     const errorTextElement = document.createElement("p");
     errorTextElement.classList.add("text-red-600 text-semibold text-sm");
     errorTextElement.innerText = "Insira um valor numérico e maior que zero";
@@ -56,16 +58,17 @@ function validateInput(evt) {
     grandParentElement.appendChild(errorTextElement);
   } else if (
     (parentElement.classList.contains("error") && !isNaN(inputValue)) ||
-    Number(inputValue) > 0) {
-      parentElement.classList.remove('error')
-      grandParentElement.querySelector('p').remove()
-    };
-};
+    Number(inputValue) > 0
+  ) {
+    parentElement.classList.remove("error");
+    grandParentElement.querySelector("p").remove();
+  }
+}
 
 for (const formElement of form) {
   if (formElement.tagName === "INPUT" && formElement.hasAttribute("name")) {
     formElement.addEventListener("blur", validateInput);
-  };
-};
+  }
+}
 
 form.addEventListener("submit", renderProgression);
