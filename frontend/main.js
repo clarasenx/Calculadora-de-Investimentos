@@ -1,6 +1,7 @@
 import { generateArray } from "./src/investmentGoals";
 
 const form = document.getElementById("investmentForm");
+const clearFormButton = document.getElementById("clearForm");
 
 function renderProgression(evt) {
   evt.preventDefault();
@@ -35,6 +36,21 @@ function renderProgression(evt) {
   );
 
   console.log(returnArray);
+}
+
+function clearForm() {
+  form["startingAmount"].value = "";
+  form["additionalContribution"].value = "";
+  form["timeAmount"].value = "";
+  form["returnRate"].value = "";
+  form["taxRate"].value = "";
+
+  const errorInputs = document.querySelectorAll(".error");
+
+  for (const error of errorInputs) {
+    error.classList.remove("error");
+    error.parentElement.querySelector("p").remove();
+  }
 }
 
 function validateInput(evt) {
@@ -73,3 +89,4 @@ for (const formElement of form) {
 }
 
 form.addEventListener("submit", renderProgression);
+clearFormButton.addEventListener("click", clearForm);
