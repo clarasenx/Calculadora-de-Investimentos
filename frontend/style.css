@@ -4,8 +4,16 @@
 
 @layer utilities {
   .error {
-    @apply border-2; 
-    @apply border-red-600; 
+    @apply border-2;
+    @apply border-red-600;
     @apply rounded-lg;
+  }
+}
+
+@layer utilities {
+  .errorText {
+    @apply text-red-600;
+    @apply font-semibold;
+    @apply text-sm;
   }
 }
