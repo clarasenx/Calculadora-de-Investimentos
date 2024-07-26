@@ -10,8 +10,8 @@ let doughnutChartReference = {};
 let progressionChartReference = {};
 
 
-function formatCurrency(value) {
-  return value.toFixed();
+function formatCurrencyToGraph(value) {
+  return value.toFixed(2);
 }
 
 function renderProgression(evt) {
@@ -56,11 +56,11 @@ function renderProgression(evt) {
       datasets: [
         {
           data: [
-            formatCurrency(finalInvestmentObject),
-            formatCurrency(
+            formatCurrencyToGraph(finalInvestmentObject.investedAmount),
+            formatCurrencyToGraph(
               finalInvestmentObject.totalInterestReturns * (1 - taxRate / 100)
             ),
-            formatCurrency(
+            formatCurrencyToGraph(
               finalInvestmentObject.totalInterestReturns * (taxRate / 100)
             ),
           ],
@@ -76,23 +76,23 @@ function renderProgression(evt) {
   });
 
   progressionChartReference = new Chart(progressionChart, {
-    type: "bar",
+    type: 'bar',
     data: {
-      label: returnArray.map((investmentObject) => investmentObject.month),
+      labels: returnArray.map((investmentObject) => investmentObject.month),
       datasets: [
         {
-          label: "Total Investido",
-          data: returnArray.map(
-            (investmentObject) => investmentObject.investedAmount
+          label: 'Total Investido',
+          data: returnArray.map((investmentObject) =>
+            formatCurrencyToGraph(investmentObject.investedAmount)
           ),
-          backgroundColor: "rgb(255, 99, 132)",
+          backgroundColor: 'rgb(255, 99, 132)',
         },
         {
-          label: "Retorno do Investimento",
-          data: returnArray.map(
-            (investmentObject) => investmentObject.interestReturns
+          label: 'Retorno do Investimento',
+          data: returnArray.map((investmentObject) =>
+            formatCurrencyToGraph(investmentObject.interestReturns)
           ),
-          backgroundColor: "rgb(54, 162, 235)",
+          backgroundColor: 'rgb(54, 162, 235)',
         },
       ],
     },
