@@ -7,6 +7,10 @@ const clearFormButton = document.getElementById("clearForm");
 const finalMoneyChart = document.getElementById("finalMoneyDistribution");
 const progressionChart = document.getElementById("progression");
 
+function formatCurrency(value) {
+  return value.toFixed()
+}
+
 function renderProgression(evt) {
   evt.preventDefault();
 
@@ -48,9 +52,9 @@ function renderProgression(evt) {
       datasets: [
         {
           data: [
-            finalInvestmentObject,
-            finalInvestmentObject.totalInterestReturns * (1 - taxRate / 100),
-            finalInvestmentObject.totalInterestReturns * (taxRate / 100),
+            formatCurrency(finalInvestmentObject),
+            formatCurrency(finalInvestmentObject.totalInterestReturns * (1 - taxRate / 100)),
+            formatCurrency(finalInvestmentObject.totalInterestReturns * (taxRate / 100)),
           ],
           backgroundColor: [
             "rgb(255, 99, 132)",
@@ -60,6 +64,40 @@ function renderProgression(evt) {
           hoverOffset: 4,
         },
       ],
+    },
+  });
+
+  new Chart(progressionChart, {
+    type: "bar",
+    data: {
+      label: returnArray.map(investmentObject => investmentObject.month),
+      datasets: [
+        {
+          label: "Total Investido",
+          data: returnArray.map(
+            (investmentObject) => investmentObject.investedAmount
+          ),
+          backgroundColor: "rgb(255, 99, 132)",
+        },
+        {
+          label: "Retorno do Investimento",
+          data: returnArray.map(
+            (investmentObject) => investmentObject.interestReturns
+          ),
+          backgroundColor: "rgb(54, 162, 235)",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          stacked: true,
+        },
+        y: {
+          stacked: true,
+        },
+      },
     },
   });
 }
