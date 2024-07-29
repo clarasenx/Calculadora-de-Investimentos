@@ -94,9 +94,9 @@ function renderProgression(evt) {
             ),
           ],
           backgroundColor: [
-            "rgb(255, 99, 132)",
-            "rgb(54, 162, 235)",
-            "rgb(255, 205, 86)",
+            "rgb(190, 242, 100)",
+            "rgb(101, 163, 13)",
+            "rgb(26, 46, 5)",
           ],
           hoverOffset: 4,
         },
@@ -114,14 +114,14 @@ function renderProgression(evt) {
           data: returnArray.map((investmentObject) =>
             formatCurrencyToGraph(investmentObject.investedAmount)
           ),
-          backgroundColor: "rgb(255, 99, 132)",
+          backgroundColor: "rgb(190, 242, 100)",
         },
         {
           label: "Retorno do Investimento",
           data: returnArray.map((investmentObject) =>
             formatCurrencyToGraph(investmentObject.interestReturns)
           ),
-          backgroundColor: "rgb(54, 162, 235)",
+          backgroundColor: "rgb(101, 163, 13)",
         },
       ],
     },

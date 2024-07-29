@@ -18,14 +18,19 @@ export const createTable = (columnsArray, dataArray, tableId) => {
 }
 
 function createTableHeader(tableReference, columnsArray) {
+
   function createTheadElement(tableReference) {
     const thead = document.createElement('thead');
     tableReference.appendChild(thead);
     return thead;
   }
-  const tableHeaderReference = tableReference.querySelector('thead') ?? createTheadElement(tableReference)
 
-  const headerRow = document.createElement('tr')
+  const tableHeaderReference = 
+    tableReference.querySelector('thead') ?? createTheadElement(tableReference);
+
+  const headerRow = document.createElement('tr');
+  ['bg-lime-900', 'text-slate-200', 'sticky', 'top-0'].forEach((cssClass) => headerRow.classList.add(cssClass))
+  
   for (const tableColumnObject of columnsArray) {
     const headerElement = `<th class='text-center'> ${tableColumnObject.columnLabel}</th>`
     headerRow.innerHTML += headerElement
