@@ -72,16 +72,44 @@
       </div>
     </aside>
 
-    <main class="h-full">
-      <section id="chartsContainer">
-        <div class="h-[36dvh]">
-          <p>Resultado Final</p>
+    <main class="row-span-2 col-span-2">
+      <section id="chartsContainer" class="h-full">
+        <div class="h-[36%] flex flex-col items-center pb-10">
+          <p class="font-bold text-lg ">Resultado Final</p>
           <canvas id="finalMoneyDistribution"></canvas>
         </div>
-        <div class="h-[56dvh]">
-          <p>Progressão</p>
+        <div class="h-[56%] flex flex-col items-center">
+          <p class="font-bold text-lg ">Progressão</p>
           <canvas id="progression"></canvas>
         </div>
+      </section>
+
+      <section id="tableContainer" class="h-full ">
+        <p class="font-bold text-lg">Resultados Mensais</p>
+        <table class="w-full max-h-full border border-separate">
+          <thead>
+            <th>Mes</th>
+            <th>Juros</th>
+            <th>Total Investido</th>
+          </thead>
+          <tbody> 
+            <tr>
+              <td>0</td>
+              <td>10</td>
+              <td>1000</td>
+            </tr> 
+            <tr>
+              <td>1</td>
+              <td>10</td>
+              <td>2000</td>
+            </tr> 
+            <tr>
+              <td>2</td>
+              <td>10</td>
+              <td>3000</td>
+            </tr> 
+          </tbody>
+        </table>
       </section>
     </main>
 
