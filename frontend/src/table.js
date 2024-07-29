@@ -48,8 +48,12 @@ function createTableBody(tableReference, tableItems, columnsArray) {
   const tableBodyReference =
     tableReference.querySelector("tbody") ?? createTbodyElement(tableReference);
 
+    
   for(const [itemIndex, tableItem] of tableItems.entries()) {
     const tableRow = document.createElement('tr');
+    if (itemIndex % 2 !== 0) {
+      tableRow.classList.add('bg-lime-200')
+    }
 
     for (const tableColumn of columnsArray) {
       const formatFn = tableColumn.format ?? ((info) => info);

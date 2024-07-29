@@ -1,7 +1,6 @@
 import { Chart } from "chart.js/auto";
 import { generateArray } from "./src/investmentGoals";
-import { createTable } from './src/table';
-
+import { createTable } from "./src/table";
 
 const form = document.getElementById("investmentForm");
 const clearFormButton = document.getElementById("clearForm");
@@ -10,34 +9,34 @@ const finalMoneyChart = document.getElementById("finalMoneyDistribution");
 const progressionChart = document.getElementById("progression");
 let doughnutChartReference = {};
 let progressionChartReference = {};
-
+let tableReference = document.getElementById("resultsTable");
 
 const columnsArray = [
   { columnLabel: "Mês", acessor: "month" },
   {
     columnLabel: "Total Investido",
     acessor: "investedAmount",
-    format: (numInfo) => formatCurrency(numInfo),
+    format: (numInfo) => formatCurrencyToTable(numInfo),
   },
   {
     columnLabel: "Rendimento Mensal",
     acessor: "interestReturns",
-    format: (numInfo) => formatCurrency(numInfo),
+    format: (numInfo) => formatCurrencyToTable(numInfo),
   },
   {
     columnLabel: "Rendimento Total",
     acessor: "totalInterestReturns",
-    format: (numInfo) => formatCurrency(numInfo),
+    format: (numInfo) => formatCurrencyToTable(numInfo),
   },
   {
     columnLabel: "Quantia Total",
     acessor: "totalAmount",
-    format: (numInfo) => formatCurrency(numInfo),
+    format: (numInfo) => formatCurrencyToTable(numInfo),
   },
 ];
 
-function formatCurrency(value) {
-  return value.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+function formatCurrencyToTable(value) {
+  return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 function formatCurrencyToGraph(value) {
   return value.toFixed(2);
@@ -46,6 +45,7 @@ function formatCurrencyToGraph(value) {
 function renderProgression(evt) {
   evt.preventDefault();
   resetCharts();
+  resetTable();
 
   if (document.querySelector(".error")) {
     return;
@@ -138,7 +138,7 @@ function renderProgression(evt) {
     },
   });
 
-  createTable(columnsArray, returnArray, 'resultsTable');
+  createTable(columnsArray, returnArray, "resultsTable");
 }
 
 function isObjctEmpty(objct) {
@@ -146,10 +146,17 @@ function isObjctEmpty(objct) {
 }
 
 function resetCharts() {
-  if (!isObjctEmpty(doughnutChartReference) && !isObjctEmpty(progressionChartReference)) {
-    doughnutChartReference.destroy()
+  if (
+    !isObjctEmpty(doughnutChartReference) &&
+    !isObjctEmpty(progressionChartReference)
+  ) {
+    doughnutChartReference.destroy();
     progressionChartReference.destroy();
   }
+}
+
+function resetTable() {
+  
 }
 
 function clearForm() {
@@ -158,8 +165,9 @@ function clearForm() {
   form["timeAmount"].value = "";
   form["returnRate"].value = "";
   form["taxRate"].value = "";
-  
+
   resetCharts();
+  resetTable();
 
   const errorInputs = document.querySelectorAll(".error");
 
