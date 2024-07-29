@@ -13,13 +13,32 @@ let progressionChartReference = {};
 
 
 const columnsArray = [
-  {columnLabel: 'Total Investido', acessor: 'investedAmount'},
-  {columnLabel: 'Rendimento Mensal', acessor: 'interestReturns'},
-  {columnLabel: 'Rendimento Total', acessor: 'totalInterestReturns'},
-  {columnLabel: 'Mês', acessor: 'month'},
-  {columnLabel: 'Quantia Total', acessor: 'totalAmount'},
-]
+  { columnLabel: "Mês", acessor: "month" },
+  {
+    columnLabel: "Total Investido",
+    acessor: "investedAmount",
+    format: (numInfo) => formatCurrency(numInfo),
+  },
+  {
+    columnLabel: "Rendimento Mensal",
+    acessor: "interestReturns",
+    format: (numInfo) => formatCurrency(numInfo),
+  },
+  {
+    columnLabel: "Rendimento Total",
+    acessor: "totalInterestReturns",
+    format: (numInfo) => formatCurrency(numInfo),
+  },
+  {
+    columnLabel: "Quantia Total",
+    acessor: "totalAmount",
+    format: (numInfo) => formatCurrency(numInfo),
+  },
+];
 
+function formatCurrency(value) {
+  return value.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+}
 function formatCurrencyToGraph(value) {
   return value.toFixed(2);
 }
@@ -86,23 +105,23 @@ function renderProgression(evt) {
   });
 
   progressionChartReference = new Chart(progressionChart, {
-    type: 'bar',
+    type: "bar",
     data: {
       labels: returnArray.map((investmentObject) => investmentObject.month),
       datasets: [
         {
-          label: 'Total Investido',
+          label: "Total Investido",
           data: returnArray.map((investmentObject) =>
             formatCurrencyToGraph(investmentObject.investedAmount)
           ),
-          backgroundColor: 'rgb(255, 99, 132)',
+          backgroundColor: "rgb(255, 99, 132)",
         },
         {
-          label: 'Retorno do Investimento',
+          label: "Retorno do Investimento",
           data: returnArray.map((investmentObject) =>
             formatCurrencyToGraph(investmentObject.interestReturns)
           ),
-          backgroundColor: 'rgb(54, 162, 235)',
+          backgroundColor: "rgb(54, 162, 235)",
         },
       ],
     },

@@ -47,7 +47,8 @@ function createTableBody(tableReference, tableItems, columnsArray) {
     const tableRow = document.createElement('tr');
 
     for (const tableColumn of columnsArray) {
-      tableRow.innerHTML += `<td class='taxt-center'>${tableItem[tableColumn.acessor]}</td>`
+      const formatFn = tableColumn.format ?? ((info) => info);
+      tableRow.innerHTML += `<td class='text-center'>${formatFn(tableItem[tableColumn.acessor])}</td>`
     }
     tableBodyReference.appendChild(tableRow);
   }
