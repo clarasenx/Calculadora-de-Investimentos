@@ -1,5 +1,7 @@
 import { Chart } from "chart.js/auto";
 import { generateArray } from "./src/investmentGoals";
+import { createTable } from './src/table';
+
 
 const form = document.getElementById("investmentForm");
 const clearFormButton = document.getElementById("clearForm");
@@ -9,6 +11,14 @@ const progressionChart = document.getElementById("progression");
 let doughnutChartReference = {};
 let progressionChartReference = {};
 
+
+const columnsArray = [
+  {columnLabel: 'Total Investido', acessor: 'investedAmount'},
+  {columnLabel: 'Rendimento Mensal', acessor: 'interestReturns'},
+  {columnLabel: 'Rendimento Total', acessor: 'totalInterestReturns'},
+  {columnLabel: 'Mês', acessor: 'month'},
+  {columnLabel: 'Quantia Total', acessor: 'totalAmount'},
+]
 
 function formatCurrencyToGraph(value) {
   return value.toFixed(2);
@@ -108,6 +118,8 @@ function renderProgression(evt) {
       },
     },
   });
+
+  createTable(columnsArray, returnArray, 'resultsTable');
 }
 
 function isObjctEmpty(objct) {
