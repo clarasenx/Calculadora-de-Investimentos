@@ -212,5 +212,18 @@ for (const formElement of form) {
   }
 }
 
+const mainEl = document.querySelector('main');
+const carrouselEl = document.getElementById('carrousel')
+const nextButton = document.getElementById('slideNext')
+const previousButton = document.getElementById("slidePrevious");
+
+nextButton.addEventListener('click', () => {
+  carrouselEl.scrollLeft += mainEl.clientWidth
+})
+
+previousButton.addEventListener('click', () => {
+  carrouselEl.scrollLeft -= mainEl.clientWidth
+})
+
 form.addEventListener("submit", renderProgression);
 clearFormButton.addEventListener("click", clearForm);
