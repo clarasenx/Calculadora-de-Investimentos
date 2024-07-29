@@ -152,11 +152,21 @@ function resetCharts() {
   ) {
     doughnutChartReference.destroy();
     progressionChartReference.destroy();
-  }
-}
+  };
+};
 
 function resetTable() {
-  
+  if (tableReference) {
+    const tbody = tableReference.querySelector("tbody");
+    if (tbody) {
+      tbody.remove();
+    }
+
+    const thead = tableReference.querySelector("thead");
+    if (thead) {
+      thead.remove();
+    }
+  }
 }
 
 function clearForm() {
